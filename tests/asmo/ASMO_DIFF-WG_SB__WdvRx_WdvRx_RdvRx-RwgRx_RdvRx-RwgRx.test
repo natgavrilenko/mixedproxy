@@ -1,0 +1,21 @@
+.global x;
+
+d0.b0.t0 {
+  st.relaxed.gpu [x], 1;
+}
+
+d0.b1.t0 {
+  st.relaxed.gpu [x], 2;
+}
+
+d0.b2.t0 {
+  ld.relaxed.gpu r0, [x] == 1;
+  ld.relaxed.cta r1, [x];
+}
+
+d0.b3.t0 {
+  ld.relaxed.gpu r2, [x] == 2;
+  ld.relaxed.cta r3, [x];
+}
+
+assert (r1 != 2 || r3 != 1) as outcome;

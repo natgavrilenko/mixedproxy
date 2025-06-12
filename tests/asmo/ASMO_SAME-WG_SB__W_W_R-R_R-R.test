@@ -1,0 +1,21 @@
+.global x;
+
+d0.b0.t0 {
+  st.weak [x], 1;
+}
+
+d0.b0.t1 {
+  st.weak [x], 2;
+}
+
+d0.b0.t2 {
+  ld.weak r0, [x] == 1;
+  ld.weak r1, [x];
+}
+
+d0.b0.t3 {
+  ld.weak r2, [x] == 2;
+  ld.weak r3, [x];
+}
+
+permit (r1 == 2 && r3 == 1) as outcome;

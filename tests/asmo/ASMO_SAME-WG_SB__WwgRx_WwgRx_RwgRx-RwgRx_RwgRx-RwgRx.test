@@ -1,0 +1,21 @@
+.global x;
+
+d0.b0.t0 {
+  st.relaxed.cta [x], 1;
+}
+
+d0.b0.t1 {
+  st.relaxed.cta [x], 2;
+}
+
+d0.b0.t2 {
+  ld.relaxed.cta r0, [x] == 1;
+  ld.relaxed.cta r1, [x];
+}
+
+d0.b0.t3 {
+  ld.relaxed.cta r2, [x] == 2;
+  ld.relaxed.cta r3, [x];
+}
+
+assert (r1 != 2 || r3 != 1) as outcome;
